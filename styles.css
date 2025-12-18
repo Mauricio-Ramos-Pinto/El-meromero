@@ -1,0 +1,134 @@
+/* ----- GENERAL ----- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    background: #f2f2f2;
+}
+
+/* ----- SIDEBAR ----- */
+.sidebar {
+    width: 250px;
+    background: #111827;
+    color: white;
+    min-height: 100vh;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+}
+
+.sidebar-title {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 22px;
+}
+
+.menu a {
+    display: block;
+    padding: 12px;
+    margin: 5px 0;
+    background: #1f2937;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.menu a:hover {
+    background: #374151;
+}
+
+.menu a.active {
+    background: #2563eb;
+}
+
+/* ----- MAIN CONTENT ----- */
+.main-content {
+    margin-left: 270px;
+    padding: 30px;
+    width: 100%;
+}
+
+h1 {
+    margin-bottom: 10px;
+}
+
+/* ----- CARDS ----- */
+.cards-container {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 3px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.card .number {
+    margin-top: 10px;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+/* ----- TABLAS ----- */
+.table {
+    width: 100%;
+    background: white;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.table th,
+.table td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.table th {
+    background: #e5e7eb;
+}
+
+/* ----- BOTONES GENERALES ----- */
+.btn {
+    background: #2563eb;
+    padding: 10px 15px;
+    border-radius: 5px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+/* Botón editar */
+.edit {
+    background: #10b981;
+    padding: 6px 10px;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* Botón eliminar */
+.delete {
+    background: #ef4444;
+    padding: 6px 10px;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+

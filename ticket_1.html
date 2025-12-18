@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket de Compra #1</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .ticket { border: 1px solid #000; padding: 20px; max-width: 600px; margin: 0 auto; }
+        .header { text-align: center; margin-bottom: 20px; }
+        .company { margin-bottom: 15px; }
+        .company h2 { color: #8b0000; margin: 5px 0; }
+        .info { margin: 15px 0; }
+        .table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        .table th, .table td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        .table th { background-color: #f2f2f2; }
+        .totals { text-align: right; margin-top: 20px; }
+        .footer { margin-top: 30px; text-align: center; font-size: 12px; color: #666; }
+        .print-btn { display: block; margin: 20px auto; padding: 10px 20px; 
+                    background: #8b0000; color: white; border: none; 
+                    cursor: pointer; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <div class="ticket">
+        <div class="header">
+            <div class="company">
+                <h2>SOUNDSPACE</h2>
+                <p>Av. Música 123, Ciudad Digital</p>
+                <p>Tel: (55) 1234-5678 | ventas@soundspace.com</p>
+            </div>
+            
+            <div class="info">
+                <h3>TICKET DE COMPRA</h3>
+                <p><strong>Ticket #:</strong> 1</p>
+                <p><strong>Fecha:</strong> 2025-12-13 15:51:19</p>
+                <p><strong>Estatus:</strong> Completado</p>
+            </div>
+        </div>
+        
+        <div class="info">
+            <h4>INFORMACIÓN DEL CLIENTE</h4>
+            <p><strong>Nombre:</strong> Mario Cardoso</p>
+            <p><strong>Email:</strong> mariocardoso@gmail.com</p>
+            <p><strong>Tarjeta:</strong> **** **** **** 1112</p>
+        </div>
+        
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Artista</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unit.</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>                <tr>
+                    <td>The Razors Edge (album)</td>
+                    <td>AC/DC</td>
+                    <td>1</td>
+                    <td>$600</td>
+                    <td>$600</td>
+                </tr>            </tbody>
+        </table>
+        
+        <div class="totals">
+            <p><strong>Subtotal:</strong> $600</p>
+            <p><strong>IVA (16%):</strong> $96</p>
+            <h3><strong>TOTAL:</strong> $696</h3>
+        </div>
+        
+        <div class="footer">
+            <p>Gracias por su compra en SoundSpace</p>
+            <p>Este documento es su comprobante de compra</p>
+            <p>Para cualquier aclaración, contacte a soporte: ventas@soundspace.com</p>
+        </div>
+    </div>
+    
+    <button class="print-btn" onclick="window.print()">🖨️ Imprimir Ticket</button>
+    <button class="print-btn" onclick="window.close()" style="background: #666;">Cerrar</button>
+    
+    <script>
+        // Auto-imprimir al cargar
+        window.onload = function() {
+            // Descomenta la siguiente línea para auto-imprimir
+            // window.print();
+        };
+    </script>
+</body>
+</html>

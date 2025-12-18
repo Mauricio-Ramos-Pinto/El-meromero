@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Sesión - Music Store</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body style="display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; background:#b30000;">
+    <div class="login-card">
+        <h2>Iniciar Sesión</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" required />
+            </div>
+            <div class="input-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" required />
+            </div>
+            <button type="submit" class="btn">Entrar</button>
+        </form>
+
+
+        <p class="register-text">
+            ¿No tienes cuenta? <a href="register.html" class="register-link">Regístrate</a>
+        </p>
+    </div>
+
+    <script src="main.js"></script>
+    <!-- login.html - Agregar este script antes del cierre de body -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('loginForm');
+    
+    // Reemplaza todo el bloque del evento submit con esto:
+loginForm.addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    if (!email || !password) {
+        alert('Complete todos los campos');
+        return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Verificando...';
+
+    try {
+        const response = await fetch('api.php?action=login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
+
+        const result = await response.json();
+
+        if (!result.success) {
+            alert(result.message || 'Credenciales incorrectas');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Entrar';
+            return;
+        }
+
+        const role = result.user.role.trim().toLowerCase();
+if (role === 'admin') {
+    window.location.href = 'a_index.html';
+} else {
+    window.location.href = 'index.html';
+}
+    
+    console.log('Rol recibido del servidor:', result.user.role);
+    console.log('Rol después de trim y lowercase:', role);
+    
+    localStorage.setItem('userRole', role);
+    
+    // Debug: mostrar todos los datos guardados
+    console.log('Datos guardados en localStorage:');
+    console.log('- userId:', result.user.id);
+    console.log('- userRole:', role);
+    console.log('- userEmail:', result.user.email);
+    
+    if (role === 'admin') {
+        console.log('Redirigiendo admin a a_index.html');
+        window.location.href = 'a_index.html';
+    } else {
+        console.log('Redirigiendo usuario a index.html');
+        window.location.href = 'index.html';
+    }
+
+    } catch (err) {
+        alert('Error de conexión');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Entrar';
+    }
+});
+
+
+    // Verificar si ya está logueado
+    const userEmail = localStorage.getItem('userEmail');
+    const userRole = localStorage.getItem('userRole');
+    
+    if (userEmail && userRole) {
+        // Si ya está logueado, redirigir según rol
+        if (userRole === 'admin') {
+            window.location.href = 'a_index.html';
+        } else {
+            window.location.href = 'index.html';
+        }
+    }
+});
+</script>
+</body>
+</html>

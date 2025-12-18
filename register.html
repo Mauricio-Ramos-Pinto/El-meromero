@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro - Music Store</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* Estilos adicionales para las validaciones */
+        .input-group {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-sizing: border-box;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #8b0000;
+            box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+        }
+        
+        .input-group input.valid {
+            border-color: #28a745;
+        }
+        
+        .input-group input.invalid {
+            border-color: #dc3545;
+        }
+        
+        .input-group .hint {
+            display: block;
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+            margin-left: 2px;
+        }
+        
+        .input-group .error-message {
+            display: none;
+            font-size: 12px;
+            color: #dc3545;
+            margin-top: 4px;
+            margin-left: 2px;
+        }
+        
+        .input-group.with-error .error-message {
+            display: block;
+        }
+        
+        .password-strength {
+            margin-top: 5px;
+            height: 4px;
+            background: #ddd;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .password-strength-meter {
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease, background 0.3s ease;
+        }
+        
+        .password-strength-text {
+            font-size: 12px;
+            margin-top: 2px;
+            text-align: right;
+        }
+        
+        .requirements-list {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        
+        .requirements-list h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+            font-size: 14px;
+        }
+        
+        .requirements-list ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        
+        .requirements-list li {
+            margin-bottom: 5px;
+            color: #666;
+            list-style-type: none;
+            position: relative;
+            padding-left: 20px;
+        }
+        
+        .requirements-list li:before {
+            content: "✗";
+            position: absolute;
+            left: 0;
+            color: #dc3545;
+        }
+        
+        .requirements-list li.valid:before {
+            content: "✓";
+            color: #28a745;
+        }
+        
+        #registerMessage {
+            padding: 12px;
+            border-radius: 6px;
+            margin: 15px 0;
+            font-size: 14px;
+            text-align: center;
+            display: none;
+        }
+        
+        #registerMessage.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        #registerMessage.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        #registerMessage.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: #8b0000;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #6b0000;
+        }
+        
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .register-text {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+        }
+        
+        .register-link {
+            color: #8b0000;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .register-link:hover {
+            text-decoration: underline;
+        }
+        
+        .age-info {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+            margin-left: 2px;
+        }
+        
+        .password-info {
+            font-size: 12px;
+            color: #666;
+            margin-top: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .password-info span {
+            cursor: pointer;
+            color: #8b0000;
+        }
+        
+        .password-info span:hover {
+            text-decoration: underline;
+        }
+        
+        /* Estilos para el logo */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #8b0000;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body style="display:flex; justify-content:center; align-items:center; min-height:100vh; background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);">
+    <div class="login-card" style="background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); width: 100%; max-width: 500px;">
+        <div class="logo-container">
+            <a href="index.html" class="logo">🎵 SoundSpace</a>
+            <p style="color: #666; margin-top: 5px;">Tu tienda de música digital</p>
+        </div>
+        
+        <h2 style="text-align: center; color: #333; margin-bottom: 25px;">Crear cuenta</h2>
+        
+        <form id="registerForm">
+            <div class="input-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required 
+                       placeholder="Ej: Juan"
+                       pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+"
+                       title="Solo letras y espacios" />
+                <span class="hint">Solo letras</span>
+                <span class="error-message">El nombre solo puede contener letras</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="apellido">Apellido</label>
+                <input type="text" id="apellido" name="apellido" required 
+                       placeholder="Ej: Pérez"
+                       pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+"
+                       title="Solo letras y espacios" />
+                <span class="hint">Solo letras</span>
+                <span class="error-message">El apellido solo puede contener letras</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" required 
+                       placeholder="ejemplo@dominio.com" />
+                <span class="hint">Formato: usuario@dominio.com</span>
+                <span class="error-message">Ingresa un email válido</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" required 
+                       placeholder="10 dígitos"
+                       maxlength="10"
+                       pattern="\d{10}"
+                       title="10 dígitos numéricos" />
+                <span class="hint">Solo números (10 dígitos)</span>
+                <span class="error-message">El teléfono debe tener 10 dígitos</span>
+            </div>
+            
+            <div class="input-group">
+                <label for="fechaNacimiento">Fecha de nacimiento</label>
+                <input type="date" id="fechaNacimiento" name="fecha_nac" required />
+                <div class="age-info">Debes tener entre 18 y 100 años</div>
+                <span class="error-message">Debes tener entre 18 y 100 años</span>
+            </div>
+            
+            <div class="requirements-list">
+                <h4>Requisitos de contraseña:</h4>
+                <ul>
+                    <li id="req-length">Mínimo 9 caracteres</li>
+                    <li id="req-uppercase">Al menos una mayúscula</li>
+                    <li id="req-lowercase">Al menos una minúscula</li>
+                    <li id="req-number">Al menos un número</li>
+                    <li id="req-special">Al menos un carácter especial (@$!%*?&)</li>
+                    <li id="req-match">Las contraseñas coinciden</li>
+                </ul>
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required 
+                       placeholder="Ingresa tu contraseña" />
+                <div class="password-info">
+                    <span id="togglePassword">👁️ Mostrar</span>
+                    <span id="charCount">0/9</span>
+                </div>
+                <div class="password-strength">
+                    <div class="password-strength-meter" id="passwordStrengthMeter"></div>
+                </div>
+                <div class="password-strength-text" id="passwordStrengthText"></div>
+            </div>
+            
+            <div class="input-group">
+                <label for="confirmPassword">Confirmar contraseña</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required 
+                       placeholder="Repite tu contraseña" />
+                <div class="password-info">
+                    <span id="toggleConfirmPassword">👁️ Mostrar</span>
+                </div>
+                <span class="error-message">Las contraseñas no coinciden</span>
+            </div>
+
+            <div id="registerMessage" class="register-notice"></div>
+
+            <button type="submit" class="btn" id="submitBtn">Registrarse</button>
+        </form>
+        
+        <p class="register-text">¿Ya tienes cuenta? <a href="login.html" class="register-link">Inicia sesión</a></p>
+        
+        
+    </div>
+
+    <script src="main.js"></script>
+    <script>
+        // Script adicional para mejoras visuales
+        document.addEventListener('DOMContentLoaded', function() {
+            // Toggle para mostrar/ocultar contraseña
+            const togglePassword = document.getElementById('togglePassword');
+            const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            
+            if (togglePassword && passwordInput) {
+                togglePassword.addEventListener('click', function() {
+                    const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    passwordInput.setAttribute('type', type);
+                    this.textContent = type === 'password' ? '👁️ Mostrar' : '👁️ Ocultar';
+                });
+            }
+            
+            if (toggleConfirmPassword && confirmPasswordInput) {
+                toggleConfirmPassword.addEventListener('click', function() {
+                    const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                    confirmPasswordInput.setAttribute('type', type);
+                    this.textContent = type === 'password' ? '👁️ Mostrar' : '👁️ Ocultar';
+                });
+            }
+            
+            // Actualizar contador de caracteres de contraseña
+            if (passwordInput) {
+                passwordInput.addEventListener('input', function() {
+                    const charCount = document.getElementById('charCount');
+                    if (charCount) {
+                        const length = this.value.length;
+                        charCount.textContent = `${length}/9`;
+                        charCount.style.color = length >= 9 ? '#28a745' : length >= 6 ? '#ff9900' : '#dc3545';
+                    }
+                });
+            }
+            
+            // Validación en tiempo real para email
+            const emailInput = document.getElementById('email');
+            if (emailInput) {
+                emailInput.addEventListener('blur', function() {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    const parent = this.parentNode;
+                    
+                    if (this.value && !emailRegex.test(this.value)) {
+                        parent.classList.add('with-error');
+                        this.classList.remove('valid');
+                        this.classList.add('invalid');
+                    } else if (this.value) {
+                        parent.classList.remove('with-error');
+                        this.classList.remove('invalid');
+                        this.classList.add('valid');
+                    } else {
+                        parent.classList.remove('with-error');
+                        this.classList.remove('invalid', 'valid');
+                    }
+                });
+            }
+            
+            // Validación en tiempo real para teléfono
+            const phoneInput = document.getElementById('telefono');
+            if (phoneInput) {
+                phoneInput.addEventListener('input', function() {
+                    // Solo números
+                    this.value = this.value.replace(/\D/g, '');
+                    
+                    const parent = this.parentNode;
+                    if (this.value.length === 10) {
+                        parent.classList.remove('with-error');
+                        this.classList.remove('invalid');
+                        this.classList.add('valid');
+                    } else if (this.value.length > 0) {
+                        parent.classList.add('with-error');
+                        this.classList.remove('valid');
+                        this.classList.add('invalid');
+                    } else {
+                        parent.classList.remove('with-error');
+                        this.classList.remove('invalid', 'valid');
+                    }
+                });
+            }
+            
+            // Validación en tiempo real para nombre y apellido
+            const nameInputs = ['nombre', 'apellido'];
+            nameInputs.forEach(id => {
+                const input = document.getElementById(id);
+                if (input) {
+                    input.addEventListener('input', function() {
+                        const nameRegex = /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]*$/;
+                        const parent = this.parentNode;
+                        
+                        if (this.value && !nameRegex.test(this.value)) {
+                            parent.classList.add('with-error');
+                            this.classList.remove('valid');
+                            this.classList.add('invalid');
+                        } else if (this.value) {
+                            parent.classList.remove('with-error');
+                            this.classList.remove('invalid');
+                            this.classList.add('valid');
+                        } else {
+                            parent.classList.remove('with-error');
+                            this.classList.remove('invalid', 'valid');
+                        }
+                    });
+                }
+            });
+            
+            // Establecer fecha máxima (18 años atrás) y mínima (100 años atrás)
+            const fechaInput = document.getElementById('fechaNacimiento');
+            if (fechaInput) {
+                const today = new Date();
+                const maxDate = new Date();
+                const minDate = new Date();
+                
+                maxDate.setFullYear(today.getFullYear() - 18);
+                minDate.setFullYear(today.getFullYear() - 100);
+                
+                const formatDate = (date) => {
+                    const year = date.getFullYear();
+                    const month = String(date.getMonth() + 1).padStart(2, '0');
+                    const day = String(date.getDate()).padStart(2, '0');
+                    return `${year}-${month}-${day}`;
+                };
+                
+                fechaInput.max = formatDate(maxDate);
+                fechaInput.min = formatDate(minDate);
+                
+                // Poner fecha por defecto (25 años atrás)
+                const defaultDate = new Date();
+                defaultDate.setFullYear(today.getFullYear() - 25);
+                fechaInput.value = formatDate(defaultDate);
+            }
+            
+            // Actualizar requisitos de contraseña en tiempo real
+            if (passwordInput) {
+                passwordInput.addEventListener('input', updatePasswordRequirements);
+            }
+            
+            if (confirmPasswordInput) {
+                confirmPasswordInput.addEventListener('input', updatePasswordRequirements);
+            }
+        });
+        
+        function updatePasswordRequirements() {
+            const password = document.getElementById('password').value;
+            const confirm = document.getElementById('confirmPassword').value;
+            
+            // Actualizar cada requisito
+            const requirements = {
+                'req-length': password.length >= 9,
+                'req-uppercase': /[A-Z]/.test(password),
+                'req-lowercase': /[a-z]/.test(password),
+                'req-number': /[0-9]/.test(password),
+                'req-special': /[@$!%*?&]/.test(password),
+                'req-match': password === confirm && password.length > 0
+            };
+            
+            // Actualizar UI de cada requisito
+            for (const [id, isValid] of Object.entries(requirements)) {
+                const element = document.getElementById(id);
+                if (element) {
+                    element.classList.toggle('valid', isValid);
+                    element.classList.toggle('invalid', !isValid);
+                }
+            }
+            
+            // Actualizar medidor de fortaleza
+            updatePasswordStrength(password);
+            
+            // Actualizar estado del botón
+            const submitBtn = document.getElementById('submitBtn');
+            const allValid = Object.values(requirements).every(v => v);
+            submitBtn.disabled = !allValid;
+        }
+        
+        function updatePasswordStrength(password) {
+            const meter = document.getElementById('passwordStrengthMeter');
+            const text = document.getElementById('passwordStrengthText');
+            
+            if (!meter || !text) return;
+            
+            let strength = 0;
+            let width = 0;
+            let message = '';
+            let color = '';
+            
+            // Puntuación de fortaleza
+            if (password.length >= 9) strength++;
+            if (password.length >= 12) strength++;
+            if (/[a-z]/.test(password)) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[@$!%*?&]/.test(password)) strength++;
+            
+            // Determinar nivel de fortaleza
+            switch (true) {
+                case (strength <= 2):
+                    width = 25;
+                    message = 'Débil';
+                    color = '#dc3545';
+                    break;
+                case (strength <= 4):
+                    width = 50;
+                    message = 'Media';
+                    color = '#ff9900';
+                    break;
+                case (strength <= 6):
+                    width = 75;
+                    message = 'Fuerte';
+                    color = '#28a745';
+                    break;
+                default:
+                    width = 100;
+                    message = 'Muy Fuerte';
+                    color = '#006600';
+                    break;
+            }
+            
+            meter.style.width = width + '%';
+            meter.style.backgroundColor = color;
+            text.textContent = `Fortaleza: ${message}`;
+            text.style.color = color;
+        }
+    </script>
+</body>
+</html>
